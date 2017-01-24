@@ -1,5 +1,17 @@
 #include <stdio.h>
 
+int example5(void)
+{
+    int value1, value2, sum;
+
+    value1 = 50;
+    value2 = 25;
+    sum = value1 + value2;
+    printf("The sum of %i and %i is %i\n", value1, value2, sum);
+
+    return 0;
+}
+
 int example4(void)
 {
     int sum;
@@ -33,7 +45,7 @@ int example1(void)
 }
 
 int main(void) {
-    example4();
+    example5();
 
     return 0;
 }
