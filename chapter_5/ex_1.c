@@ -61,9 +61,96 @@ int example4(void)
     return 0;
 }
 
+int example5(void)
+{
+    int n, number, triangularNumber, counter;
+
+    for ( counter = 1; counter <= 5; ++counter) {
+        printf("What triangular number do you want? ");
+        scanf("%i", &number);
+
+        triangularNumber = 0;
+
+        for ( n = 1; n <= number; ++n) {
+            triangularNumber += n;
+        }
+
+        printf("Triangular number %i is %i\n\n", number, triangularNumber);
+    }
+
+    return 0;
+}
+
+int example6(void)
+{
+    int count = 1;
+
+    while ( count <= 5 ) {
+        printf ("%i\n", count);
+        ++count;
+    }
+
+    return 0;
+}
+
+int example7(void)
+{
+    int u, v, temp;
+
+    printf("Please type in two nonnegative integers.\n");
+    scanf("%i%i", &u, &v);
+
+    while(v != 0) {
+        temp = u % v;
+        u = v;
+        v = temp;
+    }
+
+    printf("Their greatest common divisor is %i\n", u);
+
+    return 0;
+}
+
+int example8(void)
+{
+    int number, right_digit;
+
+    printf("Enter your number.\n");
+    scanf("%i", &number);
+
+    while(number != 0) {
+        right_digit = number % 10;
+        printf("%i", right_digit);
+        number = number / 10;
+    }
+
+    printf("\n");
+
+    return 0;
+}
+
+int example9(void)
+{
+    int number, right_digit;
+
+    printf("Enter your number.\n");
+    scanf("%i", &number);
+
+    do {
+        right_digit = number % 10;
+        printf("%i", right_digit);
+        number = number / 10;
+    }
+    while(number != 0);
+
+    printf("\n");
+
+    return 0;
+}
+
 int main(void)
 {
-    example4();
+    example9();
 
     return 0;
 }
