@@ -27,7 +27,7 @@ int example_2 (void)
 int example_3 (void)
 {
     int  i;
-    
+
     for ( i = 1;  i <= 5;  ++i )
         printMessage ();
 
@@ -86,7 +86,7 @@ int example_5 (void)
 int  gcd2 (int u, int v)
 {
     int  temp;
-    
+
     while ( v != 0 ) {
         temp = u % v;
         u = v;
@@ -102,7 +102,7 @@ int example_6 (void)
 
     result = gcd2 (150, 35);
     printf ("The gcd of 150 and 35 is %i\n", result);
-    
+
     result = gcd2 (1026, 405);
     printf ("The gcd of 1026 and 405 is %i\n", result);
 
@@ -150,7 +150,7 @@ float  squareRoot (float x)
 {
     const float  epsilon = .00001;
     float        guess   = 1.0;
-    
+
     while  ( absoluteValue (guess * guess - x) >= epsilon )
         guess = ( x / guess + guess ) / 2.0;
 
@@ -171,7 +171,7 @@ int example_8 (void)
 int  minimum (int  values[10])
 {
     int  minValue, i;
-    
+
     minValue = values[0];
 
     for ( i = 1;  i < 10;  ++i )
@@ -187,7 +187,7 @@ int example_9 (void)
     int minimum (int  values[10]);
 
     printf ("Enter 10 scores\n");
-    
+
     for ( i = 0;  i < 10;  ++i )
         scanf ("%i", &scores[i]);
 
@@ -230,7 +230,7 @@ int example_10 (void)
 void  multiplyBy2 (float  array[], int  n)
 {
     int  i;
-    
+
     for ( i = 0;  i < n;  ++i )
         array[i] *= 2;
 }
@@ -277,7 +277,7 @@ int example_12 (void)
 
     for ( i = 0;  i < 16;  ++i )
         printf ("%i ", array[i]);
-        
+
     sort (array, 16);
 
     printf ("\n\nThe array after the sort:\n");
@@ -337,8 +337,115 @@ void  displayMatrix (int  matrix[3][5])
     }
 }
 
+/* example_14 */
+
+int         convertedNumber[64];
+long int    numberToConvert;
+int         base;
+int         digit = 0;
+
+void getNumberAndBase (void)
+{
+    printf ("Number to be converted? ");
+    scanf ("%li", &numberToConvert);
+
+    printf ("Base? ");
+    scanf ("%i", &base);
+
+    if ( base < 2 || base > 16 ) {
+        printf ("Bad base - must be between 2 and 16\n");
+        base = 10;
+    }
+}
+
+void convertNumber (void)
+{
+    do {
+        convertedNumber[digit] = numberToConvert % base;
+        ++digit;
+        numberToConvert /= base;
+    }
+    while ( numberToConvert != 0 );
+}
+
+void displayConvertedNumber (void)
+{
+    const char baseDigits[16] =
+            { '0', '1', '2', '3', '4', '5', '6', '7',
+              '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+    int nextDigit;
+
+    printf ("Converted number = ");
+
+    for (--digit; digit >= 0; --digit ) {
+        nextDigit = convertedNumber[digit];
+        printf ("%c", baseDigits[nextDigit]);
+    }
+
+    printf ("\n");
+}
+
+int example_14 (void)
+{
+    void getNumberAndBase (void), convertNumber (void),
+         displayConvertedNumber (void);
+
+    getNumberAndBase ();
+    convertNumber ();
+    displayConvertedNumber ();
+
+    return 0;
+}
+
+/* example 15 */
+
+void auto_static (void)
+{
+    int         autoVar = 1;
+    static int  staticVar = 1;
+
+    printf ("automatic = %i, static = %i\n", autoVar, staticVar);
+
+    ++autoVar;
+    ++staticVar;
+}
+
+int example_15 (void)
+{
+    int i;
+    void auto_static (void);
+
+    for ( i = 0; i < 5; ++i )
+        auto_static ();
+
+    return 0;
+}
+
+/* example 16 */
+
+int example_16 (void) {
+    unsigned int j;
+    unsigned long int factorial (unsigned int n);
+
+    for ( j = 0; j < 11; ++j )
+        printf ("%2u! = %lu\n", j, factorial (j));
+
+    return 0;
+}
+
+unsigned long int factorial (unsigned int n)
+{
+    unsigned long int result;
+
+    if ( n == 0 )
+        result = 1;
+    else
+        result = n * factorial (n - 1);
+
+    return result;
+}
 
 int main(void)
 {
-    example_13();
+    example_16();
 }
