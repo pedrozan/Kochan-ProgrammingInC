@@ -13,7 +13,6 @@ int example_1 (void)
 }
 
 /* example 2 */
-
 int example_2 (void)
 {
     printMessage ();
