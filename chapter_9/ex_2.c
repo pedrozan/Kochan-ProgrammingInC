@@ -7,33 +7,36 @@ struct date
     int year;
 };
 
-int f(year, month)
+int f(int year, int month)
 {
-    if (month < 3) {
+    if (month <= 2) {
         return year - 1;
     }
     return year;
 }
 
-int g(month)
+int g(int month)
 {
-    if (month < 3) {
+    if (month <= 2) {
         return month + 13;
     }
     return month + 1;
 }
 
-int N(year, month, day)
+float N(int year, int month, int day)
 {
-    return 1461 * f(year, month) / 4 + 153 * g(month) / 5 + day;
+    int f_ret = f(year, month);
+    int g_ret = g(month);
+
+    return (1461.0 * (float)f_ret / 4.0) + (153.0 * (float)g_ret / 5.0) + day;
 }
 
 int dayBetween(struct date firstDate, struct date secondDate)
 {
-    int N_1 = N(firstDate.year, firstDate.month, firstDate.year);
-    int N_2 = N(secondDate.year, secondDate.month, secondDate.year);
+    float N_1 = N((int)firstDate.year, (int)firstDate.month, (int)firstDate.year);
+    float N_2 = N((int)secondDate.year, (int)secondDate.month, (int)secondDate.year);
 
-    return N_1 - N_2;
+    return N_2 - N_1;
 }
 
 int main (void)
@@ -42,15 +45,15 @@ int main (void)
     struct date secondDate;
 
     printf ("Lets calculate how many days exist between two dates\n");
-    printf ("enter first date (day/month/year");
-    scanf ("%i/%i/%i", &firstDate.day, &firstDate.month, &firstDate.year);
+    printf ("enter first date (dd/mm/yyyy)\n");
+    scanf ("%i/%i/%i", &(firstDate.day), &(firstDate.month), &(firstDate.year));
 
-    printf ("enter first date (day/month/year");
-    scanf ("%i/%i/%i", &secondDate.day, &secondDate.month, &secondDate.year);
+    printf ("enter second date (dd/mm/yyyy)\n");
+    scanf ("%i/%i/%i", &(secondDate.day), &(secondDate.month), &(secondDate.year));
 
-    printf ("The number of days between %i/%i/%i and %i/%i/%i is\n", &firstDate.day, &firstDate.month,
-            &firstDate.year, &secondDate.day, &secondDate.month, &secondDate.year);
-    printf ("%i", dayBetween(firstDate, secondDate));
+    printf ("The number of days between %i/%i/%i and %i/%i/%i is\n", (int)firstDate.day, (int)firstDate.month,
+            (int)firstDate.year, (int)secondDate.day, (int)secondDate.month, (int)secondDate.year);
+    printf ("%i\n", dayBetween(firstDate, secondDate));
 
     return 0;
 }
