@@ -28,13 +28,13 @@ float N(int year, int month, int day)
     int f_ret = f(year, month);
     int g_ret = g(month);
 
-    return (1461.0 * (float)f_ret / 4.0) + (153.0 * (float)g_ret / 5.0) + day;
+    return 1461.0 * ((float)f_ret / 4.0) + 153.0 * ((float)g_ret / 5.0) + day;
 }
 
 int dayBetween(struct date firstDate, struct date secondDate)
 {
-    float N_1 = N((int)firstDate.year, (int)firstDate.month, (int)firstDate.year);
-    float N_2 = N((int)secondDate.year, (int)secondDate.month, (int)secondDate.year);
+    float N_1 = N(firstDate.year, firstDate.month, firstDate.day);
+    float N_2 = N(secondDate.year, secondDate.month, secondDate.day);
 
     return N_2 - N_1;
 }
